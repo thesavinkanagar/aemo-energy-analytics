@@ -1,0 +1,6 @@
+snowflake-connector-python
+dbt-snowflake
+streamlit
+pandas
+requests
+python-dotenv
