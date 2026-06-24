@@ -1,0 +1,27 @@
+version: 2
+
+sources:
+  - name: raw
+    database: ENERGY_DB
+    schema: RAW
+    tables:
+      - name: RAW_GENERATION
+
+models:
+  - name: stg_generation
+    description: "Cleaned and renamed generation data from AEMO"
+    columns:
+      - name: region
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['NSW1', 'VIC1', 'QLD1', 'SA1', 'TAS1']
+      - name: settlement_date
+        tests:
+          - not_null
+      - name: total_demand_mw
+        tests:
+          - not_null
+      - name: price_aud_mwh
+        tests:
+          - not_null
