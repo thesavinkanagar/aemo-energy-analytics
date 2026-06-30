@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: dim_region
+    description: "Dimension table mapping NEM region codes to readable names and timezones"
+    columns:
+      - name: region_code
+        tests:
+          - unique
+          - not_null
+
+  - name: mart_generation_summary
+    description: "Daily generation demand and price summary by NEM region, with 7-day rolling averages"
+    columns:
+      - name: date_day
+        tests:
+          - not_null
+      - name: region
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_region')
+              field: region_code
+      - name: avg_demand_mw
+        tests:
+          - not_null
