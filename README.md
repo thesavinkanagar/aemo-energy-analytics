@@ -44,7 +44,7 @@ flowchart TD
 ## Dataset
 
 Public electricity market data from the **Australian Energy Market Operator (AEMO)**,
-covering all 5 NEM regions (NSW, VIC, QLD, SA, TAS) across 2024 — ~500k rows of
+covering all 5 NEM regions (NSW, VIC, QLD, SA, TAS) across 2025 — ~500k rows of
 5-minute interval settlement data.
 
 | Column | Description |
