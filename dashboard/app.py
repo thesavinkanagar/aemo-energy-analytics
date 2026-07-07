@@ -84,6 +84,24 @@ fig_bar = px.bar(
 )
 st.plotly_chart(fig_bar, use_container_width=True)
 
+# --- Peak price spikes by region ---
+st.subheader("Peak Price Spikes by Region")
+fig_max = px.line(
+    filtered, x="DATE_DAY", y="MAX_PRICE_AUD_MWH", color="REGION",
+    labels={"MAX_PRICE_AUD_MWH": "Max Price ($/MWh)", "DATE_DAY": "Date"}
+)
+st.plotly_chart(fig_max, use_container_width=True)
+
+# --- Price volatility by region ---
+st.subheader("Price Volatility by Region")
+volatility = filtered.groupby("REGION_NAME", as_index=False)["AVG_PRICE_AUD_MWH"].std()
+volatility.columns = ["REGION_NAME", "PRICE_VOLATILITY"]
+fig_vol = px.bar(
+    volatility, x="REGION_NAME", y="PRICE_VOLATILITY",
+    labels={"PRICE_VOLATILITY": "Price Volatility (Std Dev)", "REGION_NAME": "Region"}
+)
+st.plotly_chart(fig_vol, use_container_width=True)
+
 # --- Raw data ---
 with st.expander("View raw data"):
     st.dataframe(filtered, use_container_width=True)
