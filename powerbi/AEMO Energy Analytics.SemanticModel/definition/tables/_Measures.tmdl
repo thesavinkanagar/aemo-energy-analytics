@@ -1,0 +1,37 @@
+table _Measures
+	lineageTag: 6e643ad5-9b53-4d2b-b5a8-a2d24b101114
+
+	measure 'Avg Demand MW' = AVERAGE(MART_GENERATION_SUMMARY[AVG_DEMAND_MW])
+		formatString: 0.00
+		lineageTag: a1503de2-cc6d-492a-9687-57b554c55e4e
+
+	measure 'Peak Demand MW' = MAX(MART_GENERATION_SUMMARY[PEAK_DEMAND_MW])
+		formatString: 0.00
+		lineageTag: f8af263c-8afa-45e2-b91d-28f3cf52941e
+
+	measure 'Avg Price AUD MWh' = AVERAGE(MART_GENERATION_SUMMARY[AVG_PRICE_AUD_MWH])
+		formatString: #,0.00
+		lineageTag: 902aef1a-c0b2-4fa4-8c6a-93f076c15165
+
+	measure 'Max Price AUD MWh' = MAX(MART_GENERATION_SUMMARY[MAX_PRICE_AUD_MWH])
+		formatString: \$#,0.00;-\$#,0.00;\$#,0.00
+		lineageTag: 231df1a5-3894-4a4a-8d97-75b94734e8f5
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-AU"}
+
+	measure 'Price Volatility' = STDEV.P(MART_GENERATION_SUMMARY[AVG_PRICE_AUD_MWH])
+		formatString: 0.00
+		lineageTag: 0307c8ce-4e58-4ccd-9764-36ea2f693f80
+
+	partition _Measures = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

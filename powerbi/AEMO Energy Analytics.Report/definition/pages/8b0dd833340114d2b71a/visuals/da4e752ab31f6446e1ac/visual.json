@@ -1,0 +1,240 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "da4e752ab31f6446e1ac",
+  "position": {
+    "x": 9.1038406827880518,
+    "y": 458.83357041251782,
+    "z": 5000,
+    "height": 261.28022759601708,
+    "width": 630.896159317212,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "MART_GENERATION_SUMMARY"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "DATE_DAY"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "Year"
+                }
+              },
+              "queryRef": "MART_GENERATION_SUMMARY.DATE_DAY.Variation.Date Hierarchy.Year",
+              "nativeQueryRef": "DATE_DAY Year",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "MART_GENERATION_SUMMARY"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "DATE_DAY"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "Quarter"
+                }
+              },
+              "queryRef": "MART_GENERATION_SUMMARY.DATE_DAY.Variation.Date Hierarchy.Quarter",
+              "nativeQueryRef": "DATE_DAY Quarter",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "MART_GENERATION_SUMMARY"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "DATE_DAY"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "Month"
+                }
+              },
+              "queryRef": "MART_GENERATION_SUMMARY.DATE_DAY.Variation.Date Hierarchy.Month",
+              "nativeQueryRef": "DATE_DAY Month",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "MART_GENERATION_SUMMARY"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "DATE_DAY"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "Day"
+                }
+              },
+              "queryRef": "MART_GENERATION_SUMMARY.DATE_DAY.Variation.Date Hierarchy.Day",
+              "nativeQueryRef": "DATE_DAY Day",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_GENERATION_SUMMARY"
+                    }
+                  },
+                  "Property": "REGION"
+                }
+              },
+              "queryRef": "MART_GENERATION_SUMMARY.REGION",
+              "nativeQueryRef": "REGION"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MART_GENERATION_SUMMARY"
+                        }
+                      },
+                      "Property": "AVG_PRICE_AUD_MWH"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(MART_GENERATION_SUMMARY.AVG_PRICE_AUD_MWH)",
+              "nativeQueryRef": "Avg Price ($/MWh)",
+              "displayName": "Avg Price ($/MWh)"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "categoryAxis": [
+        {
+          "properties": {
+            "titleText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Date'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "zoom": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "lineStyles": [
+        {
+          "properties": {
+            "lineStyle": {
+              "expr": {
+                "Literal": {
+                  "Value": "'solid'"
+                }
+              }
+            },
+            "strokeLineJoin": {
+              "expr": {
+                "Literal": {
+                  "Value": "'round'"
+                }
+              }
+            },
+            "strokeWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Price Trend Over Time'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

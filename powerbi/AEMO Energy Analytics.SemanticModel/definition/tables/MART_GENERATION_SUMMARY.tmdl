@@ -1,0 +1,177 @@
+table MART_GENERATION_SUMMARY
+	lineageTag: 4979ae6d-2d3c-4f23-b49d-0506974943d4
+
+	column DATE_DAY
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ba7bfdf0-dd96-473e-97c4-5bfd8c209569
+		summarizeBy: none
+		sourceColumn: DATE_DAY
+
+		variation Variation
+			isDefault
+			relationship: 4ee69616-994e-4b2c-bb7e-28aa0ef1008d
+			defaultHierarchy: LocalDateTable_404bf308-510d-4415-a7d3-a8b605be65c5.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column REGION
+		dataType: string
+		lineageTag: 6074f4b9-a7da-4e89-9ce9-c3b01e57eb73
+		summarizeBy: none
+		sourceColumn: REGION
+
+		annotation SummarizationSetBy = Automatic
+
+	column REGION_NAME
+		dataType: string
+		lineageTag: fddd9e0f-10f7-407c-9288-f739112e07ac
+		summarizeBy: none
+		sourceColumn: REGION_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column TIMEZONE
+		dataType: string
+		lineageTag: 401965fb-7830-4c74-b7af-2990732f7d82
+		summarizeBy: none
+		sourceColumn: TIMEZONE
+
+		annotation SummarizationSetBy = Automatic
+
+	column AVG_DEMAND_MW
+		dataType: double
+		lineageTag: f65c9c42-3f7d-4911-8ca5-e8f45a6c0ec9
+		summarizeBy: sum
+		sourceColumn: AVG_DEMAND_MW
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PEAK_DEMAND_MW
+		dataType: double
+		lineageTag: e100cc18-de25-487d-a2b0-fb8628658fa7
+		summarizeBy: sum
+		sourceColumn: PEAK_DEMAND_MW
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MIN_DEMAND_MW
+		dataType: double
+		lineageTag: b142fac1-d821-47d9-952e-fc8ade1d02c2
+		summarizeBy: sum
+		sourceColumn: MIN_DEMAND_MW
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AVG_PRICE_AUD_MWH
+		dataType: double
+		lineageTag: 0be816ed-e6bb-4dda-9113-ef676bd850d7
+		summarizeBy: sum
+		sourceColumn: AVG_PRICE_AUD_MWH
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MAX_PRICE_AUD_MWH
+		dataType: double
+		lineageTag: f784be6b-cf9e-4744-beac-e0d4985f3a2c
+		summarizeBy: sum
+		sourceColumn: MAX_PRICE_AUD_MWH
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MIN_PRICE_AUD_MWH
+		dataType: double
+		lineageTag: 61d29ea3-1e8f-4b97-90ff-e569a360cca5
+		summarizeBy: sum
+		sourceColumn: MIN_PRICE_AUD_MWH
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column INTERVAL_COUNT
+		dataType: int64
+		formatString: 0
+		lineageTag: f02280e9-03ae-43b8-80a7-d1ddc1ff201f
+		summarizeBy: sum
+		sourceColumn: INTERVAL_COUNT
+
+		annotation SummarizationSetBy = Automatic
+
+	column ROLLING_7DAY_AVG_DEMAND_MW
+		dataType: double
+		lineageTag: b54621d0-004f-4c31-b73a-427bf901dbd6
+		summarizeBy: sum
+		sourceColumn: ROLLING_7DAY_AVG_DEMAND_MW
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ROLLING_7DAY_AVG_PRICE_AUD_MWH
+		dataType: double
+		lineageTag: 201acf4e-b6a4-4ba7-bca0-87b87f832755
+		summarizeBy: sum
+		sourceColumn: ROLLING_7DAY_AVG_PRICE_AUD_MWH
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DATE_MONTH
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 47f113fe-4228-4493-94ef-c05ecb4ebf9e
+		summarizeBy: none
+		sourceColumn: DATE_MONTH
+
+		variation Variation
+			isDefault
+			relationship: dbc867e9-1375-4267-9654-b3da05d51256
+			defaultHierarchy: LocalDateTable_020097ef-49ad-41bd-a6c3-92f68014ffc4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DAY_OF_WEEK
+		dataType: string
+		lineageTag: 33008dfc-6279-47ee-8849-565a872c8de3
+		summarizeBy: none
+		sourceColumn: DAY_OF_WEEK
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MART_GENERATION_SUMMARY = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("ZEVHBHU-LT70810","COMPUTE_WH",[Implementation="2.0"]),
+				    ENERGY_DB_Database = Source{[Name="ENERGY_DB",Kind="Database"]}[Data],
+				    MARTS_Schema = ENERGY_DB_Database{[Name="MARTS",Kind="Schema"]}[Data],
+				    MART_GENERATION_SUMMARY_Table = MARTS_Schema{[Name="MART_GENERATION_SUMMARY",Kind="Table"]}[Data],
+				    #"Replaced Value" = Table.ReplaceValue(MART_GENERATION_SUMMARY_Table,"SA1","SA",Replacer.ReplaceText,{"REGION"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","NSW1","NSW",Replacer.ReplaceText,{"REGION"}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","QLD1","QLD",Replacer.ReplaceText,{"REGION"}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","TAS1","TAS",Replacer.ReplaceText,{"REGION"}),
+				    #"Replaced Value4" = Table.ReplaceValue(#"Replaced Value3","VIC1","VIC",Replacer.ReplaceText,{"REGION"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Replaced Value4",{{"DATE_MONTH", type date}, {"DATE_DAY", type date}, {"INTERVAL_COUNT", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

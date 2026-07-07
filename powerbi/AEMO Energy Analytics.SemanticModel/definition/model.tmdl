@@ -1,0 +1,23 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-GB
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["DIM_REGION","MART_GENERATION_SUMMARY","_Measures"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DIM_REGION
+ref table MART_GENERATION_SUMMARY
+ref table DateTableTemplate_20576ed0-062f-46af-af63-9d025385e05b
+ref table LocalDateTable_404bf308-510d-4415-a7d3-a8b605be65c5
+ref table LocalDateTable_020097ef-49ad-41bd-a6c3-92f68014ffc4
+ref table _Measures
+
+ref cultureInfo en-US
+
