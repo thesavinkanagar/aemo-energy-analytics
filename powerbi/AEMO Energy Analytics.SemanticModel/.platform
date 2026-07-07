@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "AEMO Energy Analytics"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "b77566f5-a214-4393-a56e-c7f661b5ac8d"
+  }
+}
