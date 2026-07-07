@@ -2,7 +2,7 @@
 
 An end-to-end data engineering project built on **Snowflake**, **dbt**, and **Python** —
 ingesting Australian electricity market data and transforming it into analytics-ready models,
-visualised in an interactive Streamlit dashboard.
+visualised in interactive **Power BI** and **Streamlit** dashboards.
 
 ---
 
@@ -139,3 +139,9 @@ dbt test
 cd ..
 streamlit run dashboard/app.py
 ```
+
+**7. Open the Power BI dashboard**
+
+Open `powerbi/AEMO Energy Analytics.pbip` in Power BI Desktop. Update the 
+Snowflake connection details in Power Query if prompted, then refresh the 
+data to load from your own Snowflake instance.
