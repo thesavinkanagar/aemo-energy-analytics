@@ -1,0 +1,14 @@
+relationship 4ee69616-994e-4b2c-bb7e-28aa0ef1008d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: MART_GENERATION_SUMMARY.DATE_DAY
+	toColumn: LocalDateTable_404bf308-510d-4415-a7d3-a8b605be65c5.Date
+
+relationship dbc867e9-1375-4267-9654-b3da05d51256
+	joinOnDateBehavior: datePartOnly
+	fromColumn: MART_GENERATION_SUMMARY.DATE_MONTH
+	toColumn: LocalDateTable_020097ef-49ad-41bd-a6c3-92f68014ffc4.Date
+
+relationship c697ca2c-5600-8095-5bbd-005a849977fa
+	fromColumn: MART_GENERATION_SUMMARY.REGION
+	toColumn: DIM_REGION.REGION_CODE
+

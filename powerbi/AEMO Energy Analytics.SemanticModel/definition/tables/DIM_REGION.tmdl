@@ -1,0 +1,47 @@
+table DIM_REGION
+	lineageTag: 9c65e4a8-a64f-49d7-8ac0-84349d952c3d
+
+	column REGION_CODE
+		dataType: string
+		lineageTag: 8a931dc6-69bd-4df8-aca0-ff4df463e920
+		summarizeBy: none
+		sourceColumn: REGION_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column REGION_NAME
+		dataType: string
+		lineageTag: a178f3dc-97ec-40e2-b5b2-27923ee99cb0
+		summarizeBy: none
+		sourceColumn: REGION_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column TIMEZONE
+		dataType: string
+		lineageTag: c25a2a67-df45-4a47-830d-3675490cf391
+		summarizeBy: none
+		sourceColumn: TIMEZONE
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_REGION = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("ZEVHBHU-LT70810","COMPUTE_WH",[Implementation="2.0"]),
+				    ENERGY_DB_Database = Source{[Name="ENERGY_DB",Kind="Database"]}[Data],
+				    MARTS_Schema = ENERGY_DB_Database{[Name="MARTS",Kind="Schema"]}[Data],
+				    DIM_REGION_Table = MARTS_Schema{[Name="DIM_REGION",Kind="Table"]}[Data],
+				    #"Replaced Value" = Table.ReplaceValue(DIM_REGION_Table,"NSW1","NSW",Replacer.ReplaceText,{"REGION_CODE"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","VIC1","VIC",Replacer.ReplaceText,{"REGION_CODE"}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","QLD1","QLD",Replacer.ReplaceText,{"REGION_CODE"}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","SA1","SA",Replacer.ReplaceText,{"REGION_CODE"}),
+				    #"Replaced Value4" = Table.ReplaceValue(#"Replaced Value3","TAS1","TAS",Replacer.ReplaceText,{"REGION_CODE"})
+				in
+				    #"Replaced Value4"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

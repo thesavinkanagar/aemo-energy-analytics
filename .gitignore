@@ -2,3 +2,8 @@
 target/
 dbt_packages/
 logs/
+
+# Power BI local cache/settings
+powerbi/*.pbip/.pbi/
+*.abf
+*.pbi.bak
