@@ -8,6 +8,7 @@ visualised in an interactive Streamlit dashboard.
 
 ## Dashboard Preview
 
+![Power BI - SA Price Volatility Spotlight](assets/powerbi_sa_spotlight.png)
 ![KPI Metrics](assets/dashboard_kpi.png)
 ![Demand Trend](assets/dashboard_demand_trend.png)
 ![Regional Breakdown](assets/dashboard_regional.png)
@@ -26,6 +27,8 @@ flowchart TD
     E -->|dbt run| G[(MARTS\ndim_region\n5 rows)]
     F --> H[Streamlit Dashboard]
     G --> H
+    F --> I[Power BI Semantic Model + Report]
+    G --> I
 ```
 ---
 
@@ -36,7 +39,7 @@ flowchart TD
 | Data Warehouse | Snowflake |
 | Transformation | dbt |
 | Ingestion | Python, pandas |
-| Visualisation | Streamlit, Plotly |
+| Visualisation | Power BI, Streamlit, Plotly |
 | Source Data | AEMO NEM — Price & Demand |
 
 ---
@@ -79,12 +82,26 @@ flowchart LR
 
 ---
 
+## Power BI Dashboard
+
+In addition to the Streamlit dashboard, this project includes a Power BI
+semantic model and report built directly on the Snowflake mart layer.
+
+- **Connection**: Import mode from Snowflake (`MART_GENERATION_SUMMARY`, `DIM_REGION`)
+- **Semantic model**: star schema with fact/dimension relationship, 5 DAX measures
+  including a `Price Volatility` measure (`STDEV.P`)
+- **Key insight surfaced**: a dedicated Price Volatility by Region view highlights
+  South Australia's structurally higher price volatility relative to other NEM regions
+- Project files are in [`/powerbi`](powerbi) (Power BI Project format — `.pbip`)
+
+---
+
 ## Key Insights
 
 - **NSW consistently has the highest electricity demand** across all NEM regions
 - **South Australia shows the most price volatility** — driven by high renewable penetration
 - **Peak demand occurs on weekdays** across all regions, dropping significantly on weekends
-- **7-day rolling averages** reveal clear seasonal demand patterns across 2024
+- **7-day rolling averages** reveal clear seasonal demand patterns across 2025
 
 ---
 
